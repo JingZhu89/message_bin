@@ -15,13 +15,13 @@ if (process.env.NODE_ENV === "development") {
 const Urlgen = ({ addEndpoint }) => {
   const [copyText, setCopyText] = useState("Copy");
   const [newURL, setNewURL] = useState("");
-  const [buttonText, setButtonText] = useState("Create new endpoint URL");
+  const [buttonText, setButtonText] = useState("Get new URL");
 
   const generateURL = async (event) => {
     event.preventDefault();
     let res = await getNewUUID();
     setNewURL(res.prefix + res.uuid);
-    setButtonText("Endpoint generated!");
+    setButtonText("URL generated!");
     setCopyText("Copy");
     addEndpoint(res.uuid);
   };
@@ -39,24 +39,28 @@ const Urlgen = ({ addEndpoint }) => {
         alignItems: "center",
         marginTop: "30px",
         justifyContent: "center",
+        gap: "30px",
       }}
     >
       <form onSubmit={generateURL}>
-        <Button type="submit" variant="contained">
+        <Button type="submit" variant="contained" sx={{ borderRadius: 28 }}>
           {buttonText}
         </Button>
       </form>
       {newURL ? (
         <Box>
-          <Typography>Your endpoint URL:</Typography>
           <TextField
-            variant="filled"
+            variant="standard"
             className="endpoint"
             value={newURL}
-            fullWidth
+            sx={{ width: "550px" }}
           />
-          <Button className="copytext" onClick={copyUrl}>
-            ({copyText})
+          <Button
+            onClick={copyUrl}
+            variant="contained"
+            sx={{ borderRadius: 28 }}
+          >
+            {copyText}
           </Button>
         </Box>
       ) : null}

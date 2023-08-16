@@ -36,25 +36,34 @@ const Urllist = ({
       }}
     >
       <hr />
-      <Typography>View requests</Typography>
+
       <form onSubmit={chooseUUID}>
         <FormControl>
-          <Select
-            value={selectedEndpoint}
-            onChange={(e) => setSelectedEndpoint(e.target.value)}
-            sx={{ width: "250px" }}
+          <Container
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              gap: "30px",
+            }}
           >
-            <MenuItem value="">Choose an endpoint:</MenuItem>
-            {endpoints.map((endpoint) => (
-              <MenuItem key={endpoint.uuid} value={endpoint.uuid}>
-                {endpoint.uuid}
-              </MenuItem>
-            ))}
-          </Select>
-          <br />
-          <Button variant="contained" type="submit">
-            View
-          </Button>
+            <Typography>Choose an Endpoint</Typography>
+            <Select
+              value={selectedEndpoint}
+              onChange={(e) => setSelectedEndpoint(e.target.value)}
+              sx={{ width: "350px", height: "40px", borderRadius: 28 }}
+            >
+              <MenuItem value="">Choose an endpoint:</MenuItem>
+              {endpoints.map((endpoint) => (
+                <MenuItem key={endpoint.uuid} value={endpoint.uuid}>
+                  {endpoint.uuid}
+                </MenuItem>
+              ))}
+            </Select>
+            <Button variant="contained" type="submit" sx={{ borderRadius: 28 }}>
+              View
+            </Button>
+          </Container>
         </FormControl>
       </form>
       <Requests chosenEndpointRequests={chosenEndpointRequests} />

@@ -22,6 +22,7 @@ const App = () => {
     }
     socket.on("new", (req) => {
       if (req.uuid === chosenEndpoint) {
+        console.log("setting requests");
         setChosenEndpointRequests(chosenEndpointRequests.concat(req.data[0]));
       }
     });
@@ -35,7 +36,7 @@ const App = () => {
   }, []);
 
   const addEndpoint = (newEndpoint) => {
-    setEndpoints((prev) => prev.concat(newEndpoint));
+    setEndpoints(endpoints.concat({ uuid: newEndpoint }));
   };
 
   return (
@@ -48,8 +49,17 @@ const App = () => {
         justifyContent: "center",
       }}
     >
-      <Typography variant="h3">Questbin</Typography>
-      <Typography>Generate an endpoint to collect HTTP requests.</Typography>
+      <Typography
+        variant="h3"
+        textAlign={"center"}
+        backgroundColor="#1565c0"
+        color="white"
+        width="1050px"
+        height="68px"
+        sx={{ borderRadius: "50px" }}
+      >
+        Questbin
+      </Typography>
       <Urlgen addEndpoint={addEndpoint} />
       <Urllist
         endpoints={endpoints}

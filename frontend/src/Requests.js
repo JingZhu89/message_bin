@@ -3,58 +3,68 @@ import { useState } from "react";
 import JsonView from "react18-json-view";
 import { Container, Typography, Box } from "@mui/material";
 import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
+
+import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 
 const Requests = ({ chosenEndpointRequests }) => {
-  const [selectedRequest, setSelectedRequest] = useState("");
-  // const COLLAPSE_LENGTH = 200; // To prevent non-HTTP responses (e.g. test data) from being auto-collapsed
-  // const [style, setStyle] = useState("reqs");
-  // const [jsonContent, setJsonContent] = useState(
-  //   "Select a request on the left"
-  // );
+  const [selectedRequest, setSelectedRequest] = useState(null);
+  const parseDate = (insert_time) => {
+    const miliSec = Date.parse(insert_time);
+    const parsedDate = new Date(miliSec);
+    const timeZone = parsedDate
+      .toString()
+      .split("(")[1]
+      .split(" ")
+      .map((word) => word[0])
+      .join("");
 
-  // if (chosenEndpointRequests.length === 0) {
-  //   output = "No requests yet...";
-  // } else {
-  // output = reqs.map((req) => {
-  //   let method = req.request_body.method ? req.request_body.method : "";
-  //   let src = req.request_body.body
-  //     ? req.request_body.body
-  //     : req.request_body;
-  //   let collapseLength = req.request_body.method ? 0 : COLLAPSE_LENGTH;
-  //   return (
-  //     <div className={style}>
-  //       {method}{" "}
-  //       <JsonView
-  //         key={req.id}
-  //         src={src}
-  //         collapseObjectsAfterLength={collapseLength}
-  //       />
-  //     </div>
-  //   );
-  // });
-  // }
-
+    return parsedDate.toString().slice(0, 24) + " " + timeZone;
+  };
   return (
     <Container
       sx={{
         display: "flex",
         flexDirection: "row",
-        alignItems: "center",
+        alignItems: "top",
         marginTop: "20px",
+        height: "600px",
       }}
     >
-      <Box>
-        <Typography variant="h5">Requests:</Typography>
-        <List>
-          {chosenEndpointRequests.map((req) => (
-            <ListItem key={req.id} disablePadding>
-              <ListItemButton>
+      <Box
+        sx={{
+          border: "solid",
+          borderTopLeftRadius: "20px",
+          borderBottomLeftRadius: "20px",
+          borderRight: "none",
+          borderWidth: "thick",
+          borderColor: "#1565c0",
+          height: "100%",
+          width: "30%",
+          overflowY: "scroll",
+        }}
+      >
+        <nav>
+          <Typography
+            variant="h5"
+            textAlign={"center"}
+            backgroundColor="#1565c0"
+            color="white"
+            sx={{ borderTopLeftRadius: "10px" }}
+          >
+            Requests
+          </Typography>
+          <List>
+            {chosenEndpointRequests.map((req) => (
+              <MenuItem
+                key={req.id}
+                selected={
+                  selectedRequest ? req.id === selectedRequest.id : false
+                }
+                onClick={(e) => setSelectedRequest(req)}
+              >
                 <ListItemText
-                  primary={req.insert_time}
+                  primary={parseDate(req.insert_time)}
                   secondary={
                     <Typography
                       sx={{ display: "inline" }}
@@ -66,12 +76,61 @@ const Requests = ({ chosenEndpointRequests }) => {
                     </Typography>
                   }
                 />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+              </MenuItem>
+            ))}
+          </List>
+        </nav>
       </Box>
-      <Box></Box>
+      <Box
+        sx={{
+          border: "solid",
+          borderTopRightRadius: "20px",
+          borderBottomRightRadius: "20px",
+          backgroundColor: "#F5F5F5",
+          borderWidth: "thick",
+          borderColor: "#1565c0",
+          width: "70%",
+          height: "100%",
+          overflowY: "scroll",
+        }}
+      >
+        <Typography
+          variant="h5"
+          textAlign={"center"}
+          backgroundColor="#1565c0"
+          color="white"
+          sx={{ borderTopRightRadius: "10px" }}
+        >
+          Details
+        </Typography>
+        <Box sx={{ paddingLeft: "50px" }}>
+          {selectedRequest ? (
+            <>
+              <Typography variant="h6" color="#1565c0">
+                Headers
+              </Typography>
+              <JsonView
+                key={selectedRequest.id}
+                src={selectedRequest.requestdata.headers}
+              />
+            </>
+          ) : null}
+        </Box>
+        <Box sx={{ paddingLeft: "50px" }}>
+          {selectedRequest ? (
+            <>
+              {" "}
+              <Typography variant="h6" color="#1565c0">
+                Body
+              </Typography>
+              <JsonView
+                key={selectedRequest.id}
+                src={selectedRequest.requestdata.body}
+              />
+            </>
+          ) : null}
+        </Box>
+      </Box>
     </Container>
   );
 };
