@@ -52,13 +52,12 @@ const App = () => {
       <Typography
         variant="h3"
         textAlign={"center"}
-        backgroundColor="#1565c0"
+        backgroundColor="#004791"
         color="white"
         width="1050px"
         height="68px"
-        sx={{ borderRadius: "50px" }}
       >
-        Questbin
+        MessageBin
       </Typography>
       <Urlgen addEndpoint={addEndpoint} />
       <Urllist

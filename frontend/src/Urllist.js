@@ -60,7 +60,11 @@ const Urllist = ({
                 </MenuItem>
               ))}
             </Select>
-            <Button variant="contained" type="submit" sx={{ borderRadius: 28 }}>
+            <Button
+              variant="contained"
+              type="submit"
+              sx={{ backgroundColor: "#004791" }}
+            >
               View
             </Button>
           </Container>

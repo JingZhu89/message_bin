@@ -43,7 +43,11 @@ const Urlgen = ({ addEndpoint }) => {
       }}
     >
       <form onSubmit={generateURL}>
-        <Button type="submit" variant="contained" sx={{ borderRadius: 28 }}>
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{ backgroundColor: "#004791" }}
+        >
           {buttonText}
         </Button>
       </form>
@@ -58,7 +62,7 @@ const Urlgen = ({ addEndpoint }) => {
           <Button
             onClick={copyUrl}
             variant="contained"
-            sx={{ borderRadius: 28 }}
+            sx={{ backgroundColor: "#004791" }}
           >
             {copyText}
           </Button>

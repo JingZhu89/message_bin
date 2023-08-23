@@ -34,11 +34,9 @@ const Requests = ({ chosenEndpointRequests }) => {
       <Box
         sx={{
           border: "solid",
-          borderTopLeftRadius: "20px",
-          borderBottomLeftRadius: "20px",
           borderRight: "none",
           borderWidth: "thick",
-          borderColor: "#1565c0",
+          borderColor: "#004791",
           height: "100%",
           width: "30%",
           overflowY: "scroll",
@@ -48,9 +46,8 @@ const Requests = ({ chosenEndpointRequests }) => {
           <Typography
             variant="h5"
             textAlign={"center"}
-            backgroundColor="#1565c0"
+            backgroundColor="#004791"
             color="white"
-            sx={{ borderTopLeftRadius: "10px" }}
           >
             Requests
           </Typography>
@@ -84,11 +81,10 @@ const Requests = ({ chosenEndpointRequests }) => {
       <Box
         sx={{
           border: "solid",
-          borderTopRightRadius: "20px",
-          borderBottomRightRadius: "20px",
+
           backgroundColor: "#F5F5F5",
           borderWidth: "thick",
-          borderColor: "#1565c0",
+          borderColor: "#004791",
           width: "70%",
           height: "100%",
           overflowY: "scroll",
@@ -97,16 +93,15 @@ const Requests = ({ chosenEndpointRequests }) => {
         <Typography
           variant="h5"
           textAlign={"center"}
-          backgroundColor="#1565c0"
+          backgroundColor="#004791"
           color="white"
-          sx={{ borderTopRightRadius: "10px" }}
         >
           Details
         </Typography>
         <Box sx={{ paddingLeft: "50px" }}>
           {selectedRequest ? (
             <>
-              <Typography variant="h6" color="#1565c0">
+              <Typography variant="h6" color="#004791">
                 Headers
               </Typography>
               <JsonView
@@ -120,7 +115,7 @@ const Requests = ({ chosenEndpointRequests }) => {
           {selectedRequest ? (
             <>
               {" "}
-              <Typography variant="h6" color="#1565c0">
+              <Typography variant="h6" color="#004791">
                 Body
               </Typography>
               <JsonView
